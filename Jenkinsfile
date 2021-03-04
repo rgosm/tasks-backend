@@ -16,5 +16,19 @@ pipeline{
                 war: 'target/tasks-backend.war'
             }
         }
+        stage('Deploy Frontend'){
+            steps{
+                dir('frontend'){
+                    git 'https://github.com/rgosm/tasks-frontend'
+                    bat 'mvn clean package'
+                    deploy adapters: [tomcat8(credentialsId: 'user_tomcat', 
+                    path: '', 
+                    url: 'http://localhost:8090')], 
+                    contextPath: 'tasks', 
+                    war: 'target/tasks.war'
+                }
+
+            }
+        }
     }
 }
