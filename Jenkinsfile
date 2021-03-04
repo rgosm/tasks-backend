@@ -33,7 +33,7 @@ pipeline{
         stage('Functional Test'){
             steps{
                 dir('functional-test'){
-                    git 'https://github.com/rgosm/tasks-functional-test'
+                    git branch: 'main', url: 'https://github.com/rgosm/tasks-functional-test'
                     bat 'mvn test'
                 }
             }
